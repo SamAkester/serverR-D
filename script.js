@@ -3,6 +3,11 @@ const dataBase = document.getElementById("dataBase");
 const nameInput = document.getElementById("nameInput");
 const greetResult = document.getElementById("greetResult");
 const greetButton = document.getElementById("greetButton");
+const namesButton = document.getElementById("namesButton");
+const namesResult = document.getElementById("namesResult");
+
+
+
 
 
 
@@ -38,3 +43,18 @@ fetch("http://localhost:3000/person")
     dataBase.textContent = "could not reach server";})
 }
 );
+
+namesButton.addEventListener("click", function(){
+    fetch("http://localhost:3000/names") 
+.then(function(response){
+    return response.json();
+
+})
+    .then(function(nameData){
+        namesResult.textContent = nameData.join(", ");
+
+    })
+    .catch(function(error){
+console.log("could not reach server");
+    })
+});

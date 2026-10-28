@@ -6,6 +6,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+const names = [];
 
 app.get ("/hello" , function(req, res){
     res.send("hello from the server")
@@ -18,10 +19,16 @@ res.json(person);
 console.log(person)
 });
 
+app.get("/names", function(req, res){
+res.json(names)
+});
+
 app.post("/greet", function(req, res){
     console.log(req.body);
 const name = req.body.name;
-res.json({message:"Hello " + name});
+names.push(name)
+
+res.json({message:"Hello " + name})
 });
 app.listen (3000, function(){
     console.log("server is running")
